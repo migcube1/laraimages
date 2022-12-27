@@ -35,19 +35,24 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="{{ route('admin.home') }}" class="nav-link">
+                            <a href="{{ route('admin.home') }}"
+                                class="nav-link {{ request()->routeIs('admin.home') ? 'active' : '' }}">
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownImages" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle {{ request()->routeIs('admin.files.*') ? 'active' : '' }}"
+                                href="#" id="navbarDropdownImages" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 Imágenes
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownImages">
-                                <li><a class="dropdown-item" href="{{ route('admin.files.index') }}">Ver imágenes</a>
+                                <li><a class="dropdown-item {{ request()->routeIs('admin.files.index') ? 'active' : '' }}"
+                                        href="{{ route('admin.files.index') }}">Ver imágenes</a>
                                 </li>
-                                <li><a class="dropdown-item" href="{{ route('admin.files.create') }}">Subir imágenes</a>
+                                <li><a class="dropdown-item {{ request()->routeIs('admin.files.create') ? 'active' : '' }}"
+                                        href="{{ route('admin.files.create') }}">Subir
+                                        imágenes</a>
                                 </li>
                             </ul>
                         </li>

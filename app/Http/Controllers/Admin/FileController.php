@@ -6,8 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 class FileController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +43,22 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validamos el archivo
+        $request->validate([
+            "file" => 'required|image|max:2048',
+        ]);
+
+        // Subimos el archivo al servidor local
+        $images = $request->file('file')->store('public/images'); //public/images/file
+        $url = Storage::url($images); //storage/images/file
+
+        // Creamos el registro a la base de datos
+        File::create([
+            'url' => $url,
+        ]);
+
+        // Redireccionamos a la vista para ver las imágenes
+        return redirect()->route('admin.files.index');
     }
 
     /**

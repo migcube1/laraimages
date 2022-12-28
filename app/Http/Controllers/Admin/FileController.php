@@ -58,7 +58,7 @@ class FileController extends Controller
         ]);
 
         // Redireccionamos a la vista para ver las imágenes
-        return redirect()->route('admin.files.index');
+        // return redirect()->route('admin.files.index');
     }
 
     /**
